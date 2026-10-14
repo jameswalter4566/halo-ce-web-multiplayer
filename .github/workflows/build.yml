@@ -90,6 +90,12 @@ jobs:
       - name: Rotation rules test
         run: python3 tools/variant_overrides_test.py
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: halo-server
+          path: build/linux/halo
+          retention-days: 7
+
       - name: Compile cache
         run: ccache --show-stats
 
@@ -195,3 +201,9 @@ jobs:
         env:
           CGO_ENABLED: "0"
         run: go build -trimpath -o halo-gateway .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: halo-gateway
+          path: port/gateway/halo-gateway
+          retention-days: 7
